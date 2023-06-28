@@ -1,12 +1,22 @@
+import { AppService } from './app.service';
 import { Response } from 'express';
-import { Body, Controller, HttpStatus, Post, Res } from '@nestjs/common';
+import { Body, Controller, Get, HttpStatus, Post, Res } from '@nestjs/common';
 
 @Controller('api/sentence')
 export class AppController {
+  constructor(private readonly AppService: AppService) {}
+
   @Post('')
-  postSentence(@Body() sentence: string, @Res() res: Response): Response {
+  async postSentence(@Body() body: string, @Res() res: Response) {
     return res
       .status(HttpStatus.ACCEPTED)
-      .json({ status: '200', body: 'Success' });
+      .send(await this.AppService.storeSentence(body));
+  }
+
+  @Get('')
+  async getAllSentences(@Res() res: Response) {
+    return res
+      .status(HttpStatus.ACCEPTED)
+      .send(await this.AppService.getAllSentences());
   }
 }

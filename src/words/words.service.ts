@@ -12,9 +12,11 @@ export class WordsService {
 
   async getWords(wordType: string) {
     try {
-      return await this.wordsRepository.find({
-        where: { type: wordType },
-      });
+      return (
+        await this.wordsRepository.findOne({
+          where: { type: wordType },
+        })
+      ).words;
     } catch (error) {
       throw new UnprocessableEntityException(error);
     }

@@ -1,6 +1,10 @@
-import { Entity } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
-@Entity()
-class WordTypes {
+@Entity('WordTypes')
+export class WordTypes {
+  @PrimaryGeneratedColumn()
+  id: number;
+
+  @Column()
   type: string;
 }

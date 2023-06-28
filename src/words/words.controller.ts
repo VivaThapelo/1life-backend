@@ -1,4 +1,4 @@
-import { Controller, Get, HttpStatus, Param, Res } from '@nestjs/common';
+import { Controller, Get, HttpStatus, Param, Query, Res } from '@nestjs/common';
 import { WordsService } from './words.service';
 import { Response } from 'express';
 import { WordTypes } from 'src/dtos/word-types.dto';
@@ -7,13 +7,13 @@ import { WordTypes } from 'src/dtos/word-types.dto';
 export class WordsController {
   constructor(private readonly wordsService: WordsService) {}
 
-  @Get('/words')
-  getWords(
-    @Param() wordType: WordTypes,
+  @Get('/:type')
+  async getWords(
+    @Param('id') type,
     @Res() res: Response,
-  ): Response<string[]> {
+  ): Promise<Response<string[]>> {
     return res
       .status(HttpStatus.OK)
-      .send(this.wordsService.getWords(wordType.toString()));
+      .send(await this.wordsService.getWords(type));
   }
 }

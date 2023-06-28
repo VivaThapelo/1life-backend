@@ -1,12 +1,16 @@
+import { Response } from 'express';
 import { WordTypesService } from './word-types.service';
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, HttpStatus, Res } from '@nestjs/common';
 
 @Controller('api/wordtypes')
 export class WordTypesController {
   constructor(private readonly wordTypesService: WordTypesService) {}
 
   @Get('')
-  async getWordTypes() {
-    return await this.wordTypesService.getWordTypes();
+  async getWordTypes(@Res() res: Response) {
+    console.log(this.wordTypesService.getWordTypes());
+    return res
+      .status(HttpStatus.OK)
+      .send(await this.wordTypesService.getWordTypes());
   }
 }

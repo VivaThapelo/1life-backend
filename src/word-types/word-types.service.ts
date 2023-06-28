@@ -12,7 +12,9 @@ export class WordTypesService {
 
   async getWordTypes() {
     try {
-      return await this.typeRepository.find();
+      return (await this.typeRepository.find()).flatMap(
+        (wordTypes) => wordTypes.type,
+      );
     } catch (error) {
       throw new UnprocessableEntityException(error);
     }
