@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 async function bootstrap() {
   const app = await NestFactory.create(AppModule, { bodyParser: false });
   app.use(bodyParser.text({ type: 'text/html' }));
+  app.enableCors();
   await app.listen(3000);
 }
 bootstrap();

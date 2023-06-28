@@ -9,9 +9,10 @@ export class WordsController {
 
   @Get('/:type')
   async getWords(
-    @Param('id') type,
+    @Param('type') type,
     @Res() res: Response,
   ): Promise<Response<string[]>> {
+    console.log(type);
     return res
       .status(HttpStatus.OK)
       .send(await this.wordsService.getWords(type));
