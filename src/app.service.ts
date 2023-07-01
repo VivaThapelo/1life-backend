@@ -10,7 +10,7 @@ export class AppService {
     private readonly sentenceRepository: Repository<Sentences>,
   ) {}
 
-  async storeSentence(sentence: string): Promise<void> {
+  async storeSentence(sentence: string) {
     console.log(sentence);
     const newSentence: Sentences = { sentence: sentence };
     this.sentenceRepository.save(newSentence);

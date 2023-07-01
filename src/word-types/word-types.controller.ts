@@ -8,7 +8,6 @@ export class WordTypesController {
 
   @Get('')
   async getWordTypes(@Res() res: Response) {
-    console.log(this.wordTypesService.getWordTypes());
     return res
       .status(HttpStatus.OK)
       .send(await this.wordTypesService.getWordTypes());
